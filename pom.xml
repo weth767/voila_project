@@ -12,7 +12,7 @@
 	<artifactId>voila</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>voila</name>
-	<description>voila  project</description>
+	<description>voila project</description>
 	<properties>
 		<java.version>11</java.version>
 		<kotlin.version>1.5.20</kotlin.version>

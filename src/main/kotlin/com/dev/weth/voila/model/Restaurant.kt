@@ -1,19 +1,19 @@
 package com.dev.weth.voila.model
 
-import com.dev.weth.voila.enum.LegalPersonTypeEnum
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToMany
 import javax.persistence.PrimaryKeyJoinColumn
 import javax.persistence.Table
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 @Entity
-@Table(name = "legal_person")
+@Table(name = "restaurant")
 @PrimaryKeyJoinColumn(name = "person_id")
-class LegalPerson(
+class Restaurant(
     @Column(name = "cnpj")
     @NotNull
     @Size(max = 14)
@@ -22,12 +22,16 @@ class LegalPerson(
     @Size(max = 150)
     @NotNull
     var companyName: String,
+    @Column(name = "is_open")
+    @NotNull
+    var open: Boolean,
+    @ManyToMany()
+    @JoinTable(name = "deliveryman_restaurant",
+        joinColumns = [JoinColumn(name = "restaurant_id")],
+        inverseJoinColumns = [JoinColumn(name = "deliveryman_id")]
+    )
+    var deliverymen: List<Deliveryman> = emptyList(),
     name: String,
     cellphone: String,
     image: ByteArray,
-    user: User,
-    @NotNull
-    @Column(name = "type")
-    @Enumerated(EnumType.ORDINAL)
-    var type: LegalPersonTypeEnum) : Person(name, cellphone, image, user) {
-}
+    user: User) : Person(name, cellphone, image, user)

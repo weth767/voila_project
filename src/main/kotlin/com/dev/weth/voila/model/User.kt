@@ -35,5 +35,4 @@ data class User (
     @NotNull
     var userType: UserTypeEnum,
     @OneToOne(mappedBy = "user",cascade = [CascadeType.ALL])
-    var person: Person) {
-}
+    var person: Person)
